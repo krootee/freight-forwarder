@@ -1,0 +1,27 @@
+{
+    users: [{
+        name: 'Vlad',
+        id: 1,
+		fullname: 'Vladislav Romenko',
+		mobile_number: '+3725013456',
+		phone_number: '',
+		email: 'vladislav@rogakopita.ee',
+		type: 'user'
+    },{
+        name: 'Denis',
+		fullname: 'Denis Mighty',
+		mobile_number: '+3725123457',
+		phone_number: '',
+		email: 'denis@rogakopita.ee',
+        id: 2,
+		type: 'super'
+    },{
+        name: 'Mich',
+		fullname: 'Michael Toomert',
+		mobile_number: '+3725088620',
+		phone_number: '',
+		email: 'michael@rogakopita.ee',
+        id: 3,
+		type: 'user'
+    }]
+}

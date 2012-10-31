@@ -1,0 +1,112 @@
+{
+    "name": "prototype",
+    "settings": {
+        "urlPrefix": "http://localhost/forwarder/",
+        "spacesToIndent": 4,
+        "exportPath": "D:/nginx-1.3.7/html/forwarder",
+        "lineEnding": "CRLF",
+        "genTimestamps": false,
+        "cacheBust": false
+    },
+    "xdsVersion": "2.1.0",
+    "xdsBuild": 640,
+    "schemaVersion": 1,
+    "upgradeVersion": 210000000498,
+    "framework": "ext41",
+    "topInstanceFileMap": {
+        "d302e41e-9b89-40f0-b0e1-3d9510eaee71": {
+            "paths": [
+                "metadata/resource/Library"
+            ],
+            "className": "Library"
+        },
+        "d4c037da-5498-4f78-b790-97c5c21b3a9b": {
+            "paths": [
+                "metadata/store/usersStore",
+                "app/store/override/usersStore.js",
+                "app/store/usersStore.js"
+            ],
+            "className": "usersStore"
+        },
+        "c6d0a25b-57d0-4e58-903b-636c00e585f3": {
+            "paths": [
+                "metadata/model/Users",
+                "app/model/override/Users.js",
+                "app/model/Users.js"
+            ],
+            "className": "Users"
+        },
+        "b3ae18be-6111-48ad-bb77-993666e11a29": {
+            "paths": [
+                "metadata/view/userDetails",
+                "app/view/override/userDetails.js",
+                "app/view/userDetails.js"
+            ],
+            "className": "userDetails"
+        },
+        "9a4f7fc4-2501-4d58-ba76-50b59f0627a4": {
+            "paths": [
+                "metadata/store/userTypesStore",
+                "app/store/override/userTypesStore.js",
+                "app/store/userTypesStore.js"
+            ],
+            "className": "userTypesStore"
+        },
+        "6b4448e9-01ed-4945-8259-52a3d8d3437d": {
+            "paths": [
+                "metadata/model/userType",
+                "app/model/override/userType.js",
+                "app/model/userType.js"
+            ],
+            "className": "userType"
+        },
+        "6994ca27-d636-437a-af88-c81e0c341b68": {
+            "paths": [
+                "metadata/view/Customers",
+                "app/view/override/Customers.js",
+                "app/view/Customers.js",
+                "app/view/Viewport.js"
+            ],
+            "className": "Customers"
+        },
+        "4454f910-b01d-4c68-9c4a-986870d0efd9": {
+            "paths": [
+                "metadata/model/Clients",
+                "app/model/override/Clients.js",
+                "app/model/Clients.js"
+            ],
+            "className": "Clients"
+        },
+        "de1e6aa9-8bb5-4594-841e-b30018d8b0bf": {
+            "paths": [
+                "metadata/store/clientsStore",
+                "app/store/override/clientsStore.js",
+                "app/store/clientsStore.js"
+            ],
+            "className": "clientsStore"
+        }
+    },
+    "viewOrderMap": {
+        "view": [
+            "b3ae18be-6111-48ad-bb77-993666e11a29",
+            "6994ca27-d636-437a-af88-c81e0c341b68"
+        ],
+        "store": [
+            "d4c037da-5498-4f78-b790-97c5c21b3a9b",
+            "9a4f7fc4-2501-4d58-ba76-50b59f0627a4",
+            "de1e6aa9-8bb5-4594-841e-b30018d8b0bf"
+        ],
+        "controller": [],
+        "model": [
+            "c6d0a25b-57d0-4e58-903b-636c00e585f3",
+            "6b4448e9-01ed-4945-8259-52a3d8d3437d",
+            "4454f910-b01d-4c68-9c4a-986870d0efd9"
+        ],
+        "resource": [
+            "d302e41e-9b89-40f0-b0e1-3d9510eaee71"
+        ],
+        "app": [
+            "application"
+        ]
+    }
+}
