@@ -1,24 +1,5 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
-
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-
-        <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/main.css">
-        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
-
-        <script src="js/plugins.js"></script>
-        <script src="js/main.js"></script>
-
         <!--jQuery References-->
         <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.7.1.min.js" type="text/javascript"></script>
         <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.17/jquery-ui.min.js" type="text/javascript"></script>
@@ -31,19 +12,12 @@
         <link href="http://cdn.wijmo.com/jquery.wijmo-complete.all.2.0.0.min.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
-        <!--[if lt IE 7]>
-            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
-        <![endif]-->
-
         <style type="text/css">
-            .userlist > tbody > tr > td
+            .wijmo-wijgrid
             {
-                vertical-align: top;
-                width: 400px;
+                min-height: 100px;
             }
-        .auto-style1 {
-	        margin-left: 46;
-}        </style>
+        </style>
 
         <div class="container">
             <div class="header">
@@ -51,36 +25,19 @@
                     Users list</h2>
             </div>
             <div class="userlist">
-                <table id="demo">
-                    <thead>
-                        <tr>
-                            <th>ID</th><th>Name</th><th>Short name</th><th>Login</th><th>Type</th><th>Mobile</th><th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>11</td><td>14</td><td>12</td><td>0</td>
-                        	<td>&nbsp;</td>
-                        	<td>&nbsp;</td>
-                        	<td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>12</td><td>15</td><td>12</td><td>0</td>
-                        	<td>&nbsp;</td>
-                        	<td>&nbsp;</td>
-                        	<td>&nbsp;</td>
-                        </tr>
-                    </tbody>
+                <table id="tableUsers">
                 </table>
             </div>
             <div class="userdetails">
                 <hr>
                 <label>ID: </label>
-                <input type="text" id="inputUserId" name="inputUserId" title="Unique user number in company" value="1" required class="auto-style1" disabled="disabled" style="width: 61px"><br>
+                <input type="text" id="inputUserId" name="inputUserId" title="Unique user number in company" required class="auto-style1" disabled="disabled" style="width: 61px"><br>
                 <label>Fullname: </label>
                 <input id="inputFullname" name="inputFullname" type="text" required><br>
                 <label>Short name: </label>
                 <input id="inputShortname" name="inputShortname" type="text" required><br>
+                <label>Email: </label>
+                <input id="inputEmail" name="inputEmail" type="text" required><br>
                 <label>Login: </label>
                 <input id="inputLogin" name="inputLogin" type="text" required><br>
                 <label>Password: </label>
@@ -109,41 +66,49 @@
 
         <script id="scriptInit">
             $(document).ready(function () {
-                $("#demo").wijgrid({
+                $("#tableUsers").wijgrid({
+                    data: new wijdatasource({
+                        proxy: new wijhttpproxy({
+                            url: "data/users.json",
+                            dataType: "json",
+                            data: {
+                                featureClass: "P",
+                                style: "full",
+                                maxRows: 5
+                            },
+                            key: "users"
+                        }),
+                        reader: new wijarrayreader([
+                            { name: "ID", mapping: "id" },
+                            { name: "Name", mapping: "fullname" },
+                            { name: "Short name", mapping: "name" },
+                            { name: "Login", mapping: "login" },
+                            { name: "Email", mapping: "email" },
+                            { name: "Mobile number", mapping: "mobile" },
+                            { name: "Type", mapping: "type" },
+                            { name: "Status", mapping: "status" }
+                        ])
+                    }),
                     columns: [
-                        { dataType: "number", sortDirection: "ascending", dataFormatString: "n0" },
-                        { dataType: "currency" },
-                        { dataType: "number", dataFormatString: "n0" },
-                        { dataType: "number", dataFormatString: "p0" }
-                    ],
+                        { dataType: "number", dataFormatString: "n0" }],
                     selectionChanged: onSelectionChanged
                 });
 
                 function onSelectionChanged() {
-                    var sc = $("#demo").wijgrid("selection").selectedCells();
-                    var log = $("#demoLogTable");
+                    console.log("onSelectionChanged");
+                    var selectedRow = $("#tableUsers").wijgrid("selection").selectedCells();
 
-                    log.find("td").removeClass("ui-state-highlight").html("<span>&nbsp</span>");
-
-                    for (var i = 0, len = sc.length(); i < len; i++) {
-                        var cellInfo = sc.item(i);
-                        var logCell = $(log[0].tBodies[0].rows[cellInfo.rowIndex()].cells[cellInfo.cellIndex()]);
-                        logCell.addClass("ui-state-highlight").text(cellInfo.value().toString());
-                    }
-                }
-
-                function onAddUser() {
-
+                    $("#inputUserId").val(selectedRow.item(0).value().toString());
+                    $("#inputFullname").val(selectedRow.item(1).value());
+                    $("#inputShortname").val(selectedRow.item(2).value());
+                    $("#inputLogin").val(selectedRow.item(3).value());
+                    $("#inputEmail").val(selectedRow.item(4).value());
+                    $("#inputMobile").val(selectedRow.item(5).value());
+                    $("#inputUserType").val(selectedRow.item(6).value());
+                    $("#inputUserStatus").val(selectedRow.item(7).value());
                 }
             });
         </script>
 
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-        <script>
-            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-            s.parentNode.insertBefore(g,s)}(document,'script'));
-        </script>
     </body>
 </html>
