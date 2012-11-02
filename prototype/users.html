@@ -149,8 +149,8 @@
                     Users list (double click/press F2 edit data, Save works in Chrome only atm)</h2>
             </div>
             <div class="userlist">
-                <table id="tableUsers" data-bind="wijgrid: { data: usersData,
-                allowEditing: true, allowKeyboardNavigation: true, highlightCurrentCell: true,
+                <table id="tableUsers" data-bind="wijgrid: { data: usersData, allowColSizing: true,
+                allowEditing: true, allowKeyboardNavigation: true, highlightCurrentCell: true, allowSorting: true,
                     columns: [
                         { headerText: 'ID', width: 50, dataType: 'number', dataFormatString: 'n0', readOnly: true, width: '5%' },
                         { headerText: 'Name', width: 150, width: '20%' },
