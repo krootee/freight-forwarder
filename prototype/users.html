@@ -136,7 +136,11 @@
                 myUsers = new usersViewModel();
                 ko.applyBindings(myUsers);
 
-                console.log(myUsers.usersData().length.toString());
+                $("#buttonAddUser").button();
+                $("#buttonSave").button();
+                $("#buttonDeleteUser").button();
+                $("#buttonNewPassword").button();
+                $("#buttonDeactivateUser").button();
             });
         </script>
 
@@ -178,8 +182,8 @@
                 <input type="button" id="buttonAddUser" onclick="addUser()" value="Add new user"/>
                 <input type="button" id="buttonSave" onclick="saveData()" value="Save changes"/>
                 <input type="button" id="buttonDeleteUser" onclick="deleteUser()" value="Delete user"/>
-                <input id="buttonNewPassword" name="buttonNewPassword" type="button" value="Generate new password"/>
-                <input id="buttonDeactivate" name="buttonDeactivate" type="button" value="Deactive user"/>
+                <input type="button" id="buttonNewPassword" disabled="disabled" value="Generate new password"/>
+                <input type="button" id="buttonDeactivateUser" disabled="disabled" value="Deactive user"/>
             </div>
         </div>
     </body>
