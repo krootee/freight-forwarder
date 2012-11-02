@@ -23,114 +23,163 @@
             .wijmo-wijgrid
             {
                 min-height: 100px;
-                width: 700px;
+                width: 1200px;
             }
         </style>
 
         <script id="scriptInit">
+            function readUsersData() {
+                var usersData = localStorage['data'];
+                if (typeof usersData == 'undefined') {
+                    return [{
+                        "id": 1,
+                        "fullname": "Vladislav Romenko",
+                        "shortName": "Vlad",
+                        "login": "vladislav",
+                        "mobile": "+3725013456",
+                        "email": "vladislav@rogakopita.ee",
+                        "type": "user",
+                        "userDisabled": false
+                    },{
+                        "id": 3,
+                        "fullname": "Denis Mighty",
+                        "shortName": "Denis",
+                        "login": "denis",
+                        "mobile": "+3725123457",
+                        "email": "denis@rogakopita.ee",
+                        "type": "superuser",
+                        "userDisabled": false
+                    },{
+                        "id": 2,
+                        "fullname": "Michael Toomert",
+                        "shortName": "Michael",
+                        "login": "michael",
+                        "mobile": "+3725088620",
+                        "email": "michael@rogakopita.ee",
+                        "type": "user",
+                        "userDisabled": false
+                    }];
+                }
+
+                return JSON.parse(usersData);
+            };
+
+            var userData = function(data) {
+                this.id = ko.observable(data.id);
+                this.fullname = ko.observable(data.fullname);
+                this.shortName = ko.observable(data.shortName);
+                this.login = ko.observable(data.login);
+                this.mobile = ko.observable(data.mobile);
+                this.email = ko.observable(data.email);
+                this.type = ko.observable(data.type);
+                this.userDisabled = ko.observable(data.userDisabled);
+            };
+
             var usersViewModel = function() {
                 var self = this;
 
-                self.usersData = ko.observableArray([{
-                    "id": 1,
-                    "fullname": "Vladislav Romenko",
-                    "name": "Vlad",
-                    "login": "vladislav",
-                    "mobile": "+3725013456",
-                    "email": "vladislav@rogakopita.ee",
-                    "type": "user",
-                    "status": "active"
-                },{
-                    "id": 3,
-                    "fullname": "Denis Mighty",
-                    "name": "Denis",
-                    "login": "denis",
-                    "mobile": "+3725123457",
-                    "email": "denis@rogakopita.ee",
-                    "type": "superuser",
-                    "status": "active"
-                },{
-                    "id": 2,
-                    "fullname": "Michael Toomert",
-                    "name": "Michael",
-                    "login": "michael",
-                    "mobile": "+3725088620",
-                    "email": "michael@rogakopita.ee",
-                    "type": "user",
-                    "status": "active"
-                }]);
+                var data = readUsersData();
+                var tempList = [];
+                self.maxUserId = 0;
 
-                self.id = ko.observable(1);
-                self.fullname = ko.observable();
-                self.shortName = ko.observable();
-                self.login = ko.observable();
-                self.password = ko.observable();
-                self.email = ko.observable();
-                self.mobile = ko.observable();
-                self.type = ko.observable();
-                self.userDisabled = ko.observable(false);
+                $.each(data, function(i) {
+                    tempList.push(new userData(data[i]));
+
+                    if (data[i].id > self.maxUserId) {
+                        self.maxUserId = data[i].id;
+                    }
+                })
+
+                self.usersData = ko.observableArray(tempList);
             };
+
+            function addUser() {
+                var newUserId = myUsers.maxUserId + 1;
+                myUsers.maxUserId = newUserId;
+
+                myUsers.usersData.push(new userData({ id: newUserId, type: "user", userDisabled: true }));
+            }
+
+            function deleteUser() {
+                var selectedRow = $("#tableUsers").wijgrid("selection").selectedCells();
+                var rowId = selectedRow.item(0).value();
+
+                console.log(rowId.toString());
+
+                var userRow;
+                for (var i = 0; i < myUsers.usersData().length; i++) {
+                    console.log("items: " + JSON.stringify(myUsers.usersData()[i]));
+                    if (myUsers.usersData()[i].id() === rowId) {
+                        userRow = myUsers.usersData()[i];
+                    }
+                }
+
+                console.log("deleting item: " + JSON.stringify(userRow));
+                // TODO - store it in array for sending to server
+
+                myUsers.usersData.remove(userRow);
+            }
+
+            function saveData() {
+                console.log(ko.toJSON(myUsers.usersData()));
+                localStorage['data'] = ko.toJSON(myUsers.usersData());
+            }
 
             function onSelectionChanged() {
                 var selectedRow = $("#tableUsers").wijgrid("selection").selectedCells();
                 console.log("onSelectionChanged " + selectedRow.item(0).value().toString());
-
-//                usersViewModel.id = selectedRow.item(0).value().toString();
-//                usersViewModel.fullname = selectedRow.item(1).value();
-//                usersViewModel.name = selectedRow.item(2).value();
-//                usersViewModel.login = selectedRow.item(3).value();
-//                usersViewModel.mobile = selectedRow.item(4).value();
-//                usersViewModel.email = selectedRow.item(5).value();
-//                usersViewModel.type = selectedRow.item(6).value();
-//                usersViewModel.userDisabled = selectedRow.item(7).value();
             };
 
-            $(document).ready(function () {
-                ko.applyBindings(new usersViewModel());
+            var myUsers;
 
+            $(document).ready(function () {
+                myUsers = new usersViewModel();
+                ko.applyBindings(myUsers);
+
+                console.log(myUsers.usersData().length.toString());
             });
         </script>
 
         <div class="container">
             <div class="header">
                 <h2>
-                    Users list</h2>
+                    Users list (double click in cell to edit data, Save works in Chrome only atm)</h2>
             </div>
             <div class="userlist">
-                <table id="tableUsers" data-bind="wijgrid: { data: usersData,
+                <table id="tableUsers" data-bind="wijgrid: { data: usersData, allowEditing: true,
                     columns: [
-                        { headerText: 'ID', width: 50, dataType: 'number', dataFormatString: 'n0', visible: false },
-                        { headerText: 'Name', width: 150 },
-                        { headerText: 'Nickname', width: 100 },
-                        { headerText: 'Login', width: 100, visible: false },
-                        { headerText: 'Mobile number', width: 100, visible: false },
-                        { headerText: 'Email', width: 150, visible: false },
-                        { headerText: 'Type', width: 50 },
-                        { headerText: 'Status', width: 50 }
+                        { headerText: 'ID', width: 50, dataType: 'number', dataFormatString: 'n0', readOnly: true, width: '5%' },
+                        { headerText: 'Name', width: 150, width: '20%' },
+                        { headerText: 'Nickname', width: 100, width: '10%' },
+                        { headerText: 'Login', width: 100, width: '10%' },
+                        { headerText: 'Mobile number', width: 100, width: '15%' },
+                        { headerText: 'Email', width: 150, width: '20%' },
+                        { headerText: 'Type', width: 50, width: '10%' },
+                        { headerText: 'Disabled', width: 50, width: '10%', dataType: 'boolean' }
                     ],
                     selectionChanged: onSelectionChanged }">
                 </table>
             </div>
             <div class="userdetails">
                 <hr>
-                <label for="userId">ID: </label><input type="text" id="userId" data-bind="wijinputnumber: { data: id, disabled: true }"/>
-                <label for="userFullname">Fullname: </label><input type="text" id="userFullname" data-bind="wijtextbox: { data: fullname }" required/>
-                <label for="userShortname">Short name: </label><input type="text" id="userShortname" data-bind="wijtextbox: { data: shortName }" required/><br>
-                <label for="userMobile">Mobile number: </label><input type="text" id="userMobile" data-bind="wijtextbox: { data: mobile }"/>
-                <label for="userEmail">Email: </label><input type="text" id="userEmail" data-bind="wijtextbox: { data: email }"/><br>
-                <label for="userLogin">Login: </label><input type="text" id="userLogin" data-bind="wijtextbox: { data: login }" required/>
-                <label for="userPassword">Password: </label><input type="text" id="userPassword" data-bind="wijtextbox: { data: password }" disabled="disabled" required/><br>
-                <label for="userType">User type: </label><select id="userType" data-bind="wijdropdown: { data: type }">
-                    <option value="1" selected="selected">user</option>
-                    <option value="2">superuser</option>
-                </select>
+                <!--<label for="userId">ID: </label><input type="text" id="userId" data-bind="wijinputnumber: { data: id, disabled: true }"/>-->
+                <!--<label for="userFullname">Fullname: </label><input type="text" id="userFullname" data-bind="wijtextbox: { data: fullname }" required/>-->
+                <!--<label for="userShortname">Short name: </label><input type="text" id="userShortname" data-bind="wijtextbox: { data: shortName }" required/><br>-->
+                <!--<label for="userMobile">Mobile number: </label><input type="text" id="userMobile" data-bind="wijtextbox: { data: mobile }"/>-->
+                <!--<label for="userEmail">Email: </label><input type="text" id="userEmail" data-bind="wijtextbox: { data: email }"/><br>-->
+                <!--<label for="userLogin">Login: </label><input type="text" id="userLogin" data-bind="wijtextbox: { data: login }" required/>-->
+                <!--<label for="userPassword">Password: </label><input type="text" id="userPassword" data-bind="wijtextbox: { data: password }" disabled="disabled" required/><br>-->
+                <!--<label for="userType">User type: </label><select id="userType" data-bind="wijdropdown: { data: type }">-->
+                    <!--<option value="1" selected="selected">user</option>-->
+                    <!--<option value="2">superuser</option>-->
+                <!--</select>-->
                 <!--<label for="userDisabled">Disabled: </label><input type="checkbox" id="userDisabled" data-bind="wijcheckbox: { checked: userDisabled }"/><br>-->
 				<br>
-                <input id="buttonAddUser" name="buttonAddUser" type="button" value="Add new user">
-                <input id="buttonSave" name="buttonSave" type="button" value="Save changes">
-                <input id="buttonNewPassword" name="buttonNewPassword" type="button" value="Generate new password">
-                <input id="buttonDeactivate" name="buttonDeactivate" type="button" value="Deactive user">
-                <input id="buttonDeleteUser" name="buttonDeleteUser" type="button" value="Delete user">
+                <input type="button" id="buttonAddUser" onclick="addUser()" value="Add new user"/>
+                <input type="button" id="buttonSave" onclick="saveData()" value="Save changes"/>
+                <input type="button" id="buttonDeleteUser" onclick="deleteUser()" value="Delete user"/>
+                <input id="buttonNewPassword" name="buttonNewPassword" type="button" value="Generate new password"/>
+                <input id="buttonDeactivate" name="buttonDeactivate" type="button" value="Deactive user"/>
             </div>
         </div>
     </body>
