@@ -29,7 +29,7 @@
 
         <script id="scriptInit">
             function readUsersData() {
-                var usersData = localStorage['data'];
+                var usersData = localStorage['usersList'];
                 if (typeof usersData == 'undefined') {
                     return [{
                         "id": 1,
@@ -122,7 +122,7 @@
 
             function saveData() {
                 console.log(ko.toJSON(myUsers.usersData()));
-                localStorage['data'] = ko.toJSON(myUsers.usersData());
+                localStorage['usersList'] = ko.toJSON(myUsers.usersData());
             }
 
             function onSelectionChanged() {
@@ -140,7 +140,6 @@
                 $("#buttonSave").button();
                 $("#buttonDeleteUser").button();
                 $("#buttonNewPassword").button();
-                $("#buttonDeactivateUser").button();
             });
         </script>
 
@@ -183,7 +182,6 @@
                 <input type="button" id="buttonSave" onclick="saveData()" value="Save changes"/>
                 <input type="button" id="buttonDeleteUser" onclick="deleteUser()" value="Delete user"/>
                 <input type="button" id="buttonNewPassword" disabled="disabled" value="Generate new password"/>
-                <input type="button" id="buttonDeactivateUser" disabled="disabled" value="Deactive user"/>
             </div>
         </div>
     </body>
