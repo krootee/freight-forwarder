@@ -12,82 +12,84 @@
     <script src="js/vendor/console.js"></script>
 </head>
 <body>
-<script src="data/people.js"></script>
 <div id="example" class="k-content">
     <div id="grid"></div>
 
     <script>
-        var products = [ {
-            "ProductID": 1,
-            "ProductName": "Tee",
-            "CategoryID": 1,
-            "UnitPrice": "18.00"
+        var clients = [ {
+            "ClientID": 1,
+            "Name": "OOO Almazi",
+            "RegistrationNumber": "1234567890",
+            "KMKR": "RU0013232",
+            "AgreementNumber": "34",
+            "AddressStreet": "Prospekt Lenina 13-7",
+            "AddressZip": "11978",
+            "AddressState": "",
+            "AddressCity": "Moscow",
+            "AddressCountryID": 4,
+            "ContactPersonName": "Vladimir Metrov",
+            "ContactPersonEmail": "vmetrov@almazi.ru",
+            "ContactPersonPhone": "8701190002",
+            "ContactPersonFax": "",
+            "PaymentDays": 30,
+            "PaymentBank": "VTB",
+            "PaymentAccount": "1803782290",
+            "PaymentReferenceNumber": "17720",
+            "Comments": "Very aggressive negotiator"
         }, {
-            "ProductID": 2,
-            "ProductName": "Chang",
-            "CategoryID": 1,
-            "UnitPrice": "19.00"
-        }, {
-            "ProductID": 3,
-            "ProductName": "Aniseed Syrup",
-            "CategoryID": 5,
-            "UnitPrice": "10.00"
-        }, {
-            "ProductID": 4,
-            "ProductName": "Chef Anton's Cajun Seasoning",
-            "CategoryID": 3,
-            "UnitPrice": "22.00"
-        }, {
-            "ProductID": 5,
-            "ProductName": "Chef Anton's Gumbo Mix",
-            "CategoryID": 2,
-            "UnitPrice": "21.35"
-        }, {
-            "ProductID": 6,
-            "ProductName": "Grandma's Boysenberry Spread",
-            "CategoryID": 4,
-            "UnitPrice": "25.00"
+            "ClientID": 2,
+            "Name": "Kilka OU",
+            "RegistrationNumber": "8821100987",
+            "KMKR": "EE0089119",
+            "AgreementNumber": "2",
+            "AddressStreet": "Liiavalaia 11-8",
+            "AddressZip": "13089",
+            "AddressState": "Harjumaa",
+            "AddressCity": "Tallinn",
+            "AddressCountryID": 1,
+            "ContactPersonName": "Mihkel Pihkel",
+            "ContactPersonEmail": "mihkel@kilka.ee",
+            "ContactPersonPhone": "3725012078",
+            "ContactPersonFax": "",
+            "PaymentDays": 14,
+            "PaymentBank": "Swedbank",
+            "PaymentAccount": "22109911889",
+            "PaymentReferenceNumber": "00911",
+            "Comments": "Like to delay payment"
         }];
 
-        var categories = [{
+        var countries = [{
             "value": 1,
-            "text": "Beverages"
+            "text": "Estonia"
         },{
             "value": 2,
-            "text": "Condiments"
+            "text": "Latvia"
         },{
             "value": 3,
-            "text": "Confections"
+            "text": "Lithuania"
         },{
             "value": 4,
-            "text": "Dairy Products"
+            "text": "Russia"
         },{
             "value": 5,
-            "text": "Grains/Cereals"
-        },{
-            "value": 6,
-            "text": "Meat/Poultry"
-        },{
-            "value": 7,
-            "text": "Produce"
-        },{
-            "value": 8,
-            "text": "Seafood"
+            "text": "Germany"
         }];
 
         $(document).ready(function () {
             var dataSource = new kendo.data.DataSource({
                 pageSize: 30,
-                data: products,
+                data: clients,
                 autoSync: true,
                 schema: {
                     model: {
-                        id: "ProductID",
+                        id: "ClientID",
                         fields: {
-                            ProductID: { editable: false, nullable: true },
-                            ProductName: { validation: { required: true } },
-                            Category: { field: "CategoryID" },
-                            UnitPrice: { type: "number", validation: { required: true, min: 1} }
+                            ClientID: { editable: false, nullable: false },
+                            Name: { validation: { required: true } },
+                            AddressStreet: {},
+                            AddressCountry: { field: "AddressCountryID" },
+                            RegistrationNumber: {},
+                            PaymentDays: { type: "number", validation: { required: true, min: 1} }
                         }
                     }
                 }
@@ -97,17 +99,36 @@
                 dataSource: dataSource,
                 pageable: true,
                 height: 600,
-                sortable: true,
+                sortable: {
+                    mode: "multiple",
+                    allowUnsort: true
+                },
                 resizable: true,
                 reorderable: true,
-                toolbar: ["create", "save"],
+                selectable: "row",
+                toolbar: [{ name: "create", text: "Add new company" }, "save"],
                 columns: [
-                    { field:"ProductName",title:"Product Name", width: "300px" },
-                    { field: "CategoryID", width: "150px", values: categories },
-                    { field: "UnitPrice", title:"Unit Price", format: "{0:c}", width: "100px" },
-                    { command: "destroy", title: " ", width: "100px" }],
-                editable: true
+                    { field: "Name", title:"Client name", width: "200px", headerAttributes: { style: "text-align: center" } },
+                    { field: "AddressStreet", title: "Address", headerAttributes: { style: "text-align: center" }, width: "250px" },
+                    { field: "AddressCountryID", title:"Country", width: "150px", values: countries, headerAttributes: { style: "text-align: center" }  },
+                    { field: "PaymentDays", title:"Payment delay", format: "{0}", width: "100px", headerAttributes: { style: "text-align: center" }  },
+                    { field: "RegistrationNumber", width: "150px" },
+                    { command: ["edit", "destroy"], title: " ", width: "180px" }],
+                editable: {
+                    mode: "popup",
+                    confirmation: "Are you sure you want to remove this company?"
+                },
+                remove: function(e) {
+                    console.log("Item deleted: " + e.row);
+                },
+                saveChanges: function(e) {
+                    console.log("Save called: " + JSON.stringify(e.values));
+                }
             });
+
+            var grid = $("#grid").data("kendoGrid");
+            grid.hideColumn("RegistrationNumber");
+            grid.select(grid.tbody.find(">tr:first"));
         });
 
     </script>
