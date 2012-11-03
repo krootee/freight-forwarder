@@ -135,6 +135,7 @@
                         fields: {
                             ClientID: { editable: false, nullable: false },
                             Name: { validation: { required: true } },
+                            AddressStreet: {},
                             AddressCountry: { field: "AddressCountryID" },
                             PaymentDays: { type: "number", validation: { required: true, min: 1} }
                         }
@@ -164,10 +165,9 @@
                     { field: "AddressStreet", title: "Address", headerAttributes: { style: "text-align: center" }, width: "250px" },
                     { field: "AddressCountryID", title:"Country", width: "150px", values: countries, headerAttributes: { style: "text-align: center" }  },
                     { field: "PaymentDays", title:"Payment delay", format: "{0}", width: "100px", headerAttributes: { style: "text-align: center" }  },
-                    { field: "RegistrationNumber", width: "150px" },
-                    { command: ["edit", "destroy"], title: " ", width: "180px" }],
+                    { command: ["destroy"], title: " ", width: "180px" }],
                 editable: {
-                    mode: "popup",
+                    mode: "incell",
                     confirmation: "Are you sure you want to remove this company?"
                 },
                 remove: function(e) {
@@ -179,7 +179,7 @@
             });
 
             var grid = $("#grid").data("kendoGrid");
-            grid.hideColumn("RegistrationNumber");
+//            grid.hideColumn("RegistrationNumber");
             grid.select(grid.tbody.find(">tr:first"));
         });
 
