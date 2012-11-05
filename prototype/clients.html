@@ -32,6 +32,7 @@
                 <div class="company-information">
                     <label>Name:</label>#= Name #<br>
                     <label>Registration number:</label>#= RegistrationNumber #<br>
+                    <label>Role:</label>#= Role #<br>
                     <label>KMKR number:</label>#= KMKR #<br>
                     <label>Client agreement number:</label>#= AgreementNumber #<br>
                     <label>Contact person:</label>#= ContactPersonName #<br>
@@ -75,6 +76,8 @@
             "AddressCity": "Moscow",
             "AddressCountryID": 4,
             "AddressCountry": "Russia", // TODO - fix me. Modify template to take ID and calculate country name from it
+            "RoleID": 1,
+            "Role": "Buyer",
             "ContactPersonName": "Vladimir Metrov",
             "ContactPersonEmail": "vmetrov@almazi.ru",
             "ContactPersonPhone": "8701190002",
@@ -96,6 +99,8 @@
             "AddressCity": "Tallinn",
             "AddressCountryID": 1,
             "AddressCountry": "Estonia",
+            "RoleID": 2,
+            "Role": "Receiver",
             "ContactPersonName": "Mihkel Pihkel",
             "ContactPersonEmail": "mihkel@kilka.ee",
             "ContactPersonPhone": "3725012078",
@@ -122,6 +127,20 @@
         },{
             "value": 5,
             "text": "Germany"
+        }];
+
+        var clientRoles = [{
+           "value": 1,
+           "text": "Buyer"
+        }, {
+            "value": 2,
+            "text": "Receiver"
+        }, {
+            "value": 3,
+            "text": "Transporter"
+        }, {
+            "value": 4,
+            "text": "TIR provider"
         }];
 
         $(document).ready(function() {
@@ -164,6 +183,7 @@
                     { field: "Name", title:"Client name", width: "200px", headerAttributes: { style: "text-align: center" } },
                     { field: "AddressStreet", title: "Address", headerAttributes: { style: "text-align: center" }, width: "250px" },
                     { field: "AddressCountryID", title:"Country", width: "150px", values: countries, headerAttributes: { style: "text-align: center" }  },
+                    { field: "RoleID", title:"Role", width: "100px", values: clientRoles, headerAttributes: { style: "text-align: center" }  },
                     { field: "PaymentDays", title:"Payment delay", format: "{0}", width: "100px", headerAttributes: { style: "text-align: center" }  },
                     { command: ["destroy"], title: " ", width: "180px" }],
                 editable: {
