@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Deal edit page</title>
+
+    <link href="css/examples-offline.css" rel="stylesheet">
+    <link href="http://cdn.kendostatic.com/2012.2.913/styles/kendo.common.min.css" rel="stylesheet">
+    <link href="http://cdn.kendostatic.com/2012.2.913/styles/kendo.metro.min.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="http://cdn.kendostatic.com/2012.2.913/js/kendo.web.min.js"></script>
+    <script src="js/vendor/console.js"></script>
+    <script src="js/main.js" type="text/javascript"></script>
+    <script src="data/defaults.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="main" class="demo-section k-widget k-header">
+        <ul>
+            <label for="dealId">Reference number: </label><label id="dealId" data-bind="text: idValue"></label><br>
+            <label for="listExpeditors">Ekspediitor: </label><input id="listExpeditors" data-bind="value: expeditorId"/><br>
+            <label for="dealDate">Kuupaev: </label><input id="dealDate" data-bind="value: dealDate"/><br>
+            <label for="client">Klient: </label><input id="client" data-bind="value: clientId"/>
+            <label for="trailerInfo">Treiler/Konteiner: </label><input id="trailerInfo" data-bind="value: trailerInfo" class="k-textbox"/><br>
+            <label for="placeFrom">Kust: </label><input id="placeFrom" data-bind="value: placeFromId"/>
+            <label for="placeTo">Kuhu: </label><input id="placeTo" data-bind="value: placeToId"/><br>
+            <label for="sender">Saatja: </label><input id="sender" data-bind="value: senderId"/>
+            <label for="receiver">Saaja: </label><input id="receiver" data-bind="value: receiverId"/><br>
+            <label for="cargoDescription">Kaup: </label><input id="cargoDescription" data-bind="value: cargo.description" class="k-textbox"/><br>
+            <label for="cargoTotalWeight">Kogukaal (kg): </label><input id="cargoTotalWeight" data-bind="value: cargo.totalWeight" class="k-textbox"/>
+            <label for="cargoVolume">Maht (m3): </label><input id="cargoVolume" data-bind="value: cargo.volume" class="k-textbox"/><br>
+            <label for="cargoTakenPlaces">Kohtade arv: </label><input id="cargoTakenPlaces" data-bind="value: cargo.takenPlaces" class="k-textbox"/>
+            <label for="cargoAccountedWeight">Arvestatud kaal: </label><input id="cargoAccountedWeight" data-bind="value: cargo.accountedWeight" class="k-textbox"/><br>
+            <label for="cargoShipName">Laev: </label><input id="cargoShipName" data-bind="value: cargo.shipName" class="k-textbox"/>
+            <label for="cargoAgentNr">Agendi reference nr.: </label><input id="cargoAgentNr" data-bind="value: cargo.agentNr" class="k-textbox"/><br>
+            <label for="cargoArvNr">Arv. nr.: </label><input id="cargoArvNr" data-bind="value: cargo.arvNr" class="k-textbox"/>
+            <label for="cargoValue">Kauba vartus: </label><input id="cargoValue" data-bind="value: cargo.value" class="k-textbox"/><br>
+            <label for="cargoConditions">Tingimused: </label><textarea id="cargoConditions" data-bind="value: cargo.conditions" rows="2" cols="100" class="k-textbox"></textarea>
+            <label for="cargoComments">Markused: </label><textarea id="cargoComments" data-bind="value: cargo.comments" rows="2" cols="100" class="k-textbox"></textarea><br>
+        </ul>
+        <!--<div id="controlButtons">-->
+            <!--<button id="addNew" class="k-button" onclick="addDeal()">Add new deal</button>-->
+            <!--<button id="editDeal" class="k-button" onclick="toolbarEditDeal()">Edit deal</button>-->
+        <!--</div>-->
+        <label>List of bills: </label>
+        <div id="grid"></div>
+    </div>
+
+    <script type="text/x-kendo-template" id="template">
+        <div>
+            <div id="bills"></div>
+        </div>
+    </script>
+
+    <style scoped>
+        /*http://demos.kendoui.com/web/templates/index.html*/
+        #main
+        {
+            background-image: none;
+            margin: -16px 0 30px;
+            padding: 30px 0 25px;
+        }
+
+        #main input,
+        #main textarea
+        {
+            margin: 5px 0 5px;
+        }
+
+        #main ul label
+        {
+            display: inline-block;
+            vertical-align: middle;
+            width: 110px;
+            padding: 0 8px;
+            text-align: right;
+        }
+    </style>
+
+    <script>
+        FR.dealViewModel = kendo.observable({
+            id: 0,
+            dealDate: new Date(),
+            idValue: function() {
+                return this.id.toString();
+            },
+            expeditorId: 0,
+            clientId: 1,
+            trailerInfo: "",
+            placeFromId: 0,
+            placeToId: 0,
+            senderId: 1,
+            receiverId: 1,
+            cargo: {
+                description: "",
+                totalWeight: "",
+                volume: "",
+                takenPlaces: "",
+                accountedWeight: "",
+                value: "",
+                shipName: "",
+                agentNr: "",
+                arvNr: "",
+                conditions: "",
+                comments: ""
+            }
+        });
+
+        var id = getParameterByName("id");
+        var idValue = parseInt(id, 10);
+        console.log(idValue);
+
+        if (id !== "") {
+            FR.dealViewModel.set("id", idValue);
+            var newId = FR.dealViewModel.get("id");
+            console.log("new id value = " + newId);
+        }
+
+        kendo.bind($("#main"), FR.dealViewModel);
+
+        $(document).ready(function() {
+            $("#dealDate").kendoDatePicker();
+
+            $("#listExpeditors").kendoDropDownList({
+                dataSource: FR.users,
+                dataTextField: "shortName",
+                dataValueField: "id"
+            });
+
+            $("#client").kendoComboBox({
+                dataSource: FR.clients,
+                dataTextField: "Name",
+                dataValueField: "ClientID"
+            });
+
+            $("#placeFrom").kendoComboBox({
+                dataSource: FR.placesFrom,
+                dataTextField: "name",
+                dataValueField: "id"
+            });
+
+            $("#placeTo").kendoComboBox({
+                dataSource: FR.placesTo,
+                dataTextField: "name",
+                dataValueField: "id"
+            });
+
+            $("#sender").kendoComboBox({
+                dataSource: FR.clients,
+                dataTextField: "Name",
+                dataValueField: "ClientID"
+            });
+
+            $("#receiver").kendoComboBox({
+                dataSource: FR.clients,
+                dataTextField: "Name",
+                dataValueField: "ClientID"
+            });
+
+            var dataSource = new kendo.data.DataSource({
+                data: FR.dealGridRows,
+                autoSync: true,
+                schema: {
+                    model: {
+                        id: "id",
+                        fields: {
+                            id: { editable: false, type: "number", nullable: false }
+                        }
+                    }
+                }
+            });
+
+            $("#grid").kendoGrid({
+                dataSource: dataSource,
+                height: 400,
+                sortable: {
+                    mode: "multiple",
+                    allowUnsort: true
+                },
+                resizable: true,
+                reorderable: true,
+                selectable: "row",
+                navigatable: true,
+                detailTemplate: kendo.template($("#template").html()),
+                detailInit: detailInit,
+                dataBound: function() {
+                    this.expandRow(this.tbody.find("tr.k-master-row").first());
+                },
+                columns: [
+                    { field: "type", title:"Type", width: "10%", headerAttributes: { style: "text-align: center" } },
+                    { field: "description", title:"Description", width: "70%", headerAttributes: { style: "text-align: center" } },
+                    { field: "currency", title:"Currency", width: "10%", headerAttributes: { style: "text-align: center" } },
+                    { field: "total", title:"Total", width: "10%", headerAttributes: { style: "text-align: center" } }
+                ],
+                editable: false
+            });
+
+            var grid = $("#grid").data("kendoGrid");
+            grid.select(grid.tbody.find(">tr:first"));
+        });
+
+        function detailInit(e) {
+            var detailRow = e.detailRow;
+            console.log(e.data.id);
+            detailRow.find("#bills").kendoGrid({
+                dataSource: [ {"description": "test", "currency": "EUR", "amount": "100.00"}],
+                scrollable: true,
+                sortable: true,
+                selectable: "row",
+                toolbar: [{ name: "create", text: "Add new record" }],
+                columns: [
+                    { field: "description", title: "Description", width: 70 },
+                    { field: "currency", title: "Currency", width: 70 },
+                    { field: "amount", title: "Amount", width: 70 },
+                    { command: ["edit", "destroy"], title: " ", width: "100px" }
+                ]
+            });
+        }
+    </script>
+
+</body>
+</html>

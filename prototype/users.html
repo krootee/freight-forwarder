@@ -17,6 +17,8 @@
         <script src="http://cdn.wijmo.com/external/knockout-2.0.0.js" type="text/javascript"></script>
         <!--Wijmo Knockout Integration Library-->
         <script src="http://cdn.wijmo.com/external/knockout.wijmo.js" type="text/javascript"></script>
+
+        <script src="data/defaults.js" type="text/javascript"></script>
     </head>
     <body>
         <style type="text/css">
@@ -27,38 +29,12 @@
             }
         </style>
 
+
         <script id="scriptInit">
             function readUsersData() {
                 var usersData = localStorage['usersList'];
                 if (typeof usersData == 'undefined') {
-                    return [{
-                        "id": 1,
-                        "fullname": "Vladislav Romenko",
-                        "shortName": "Vlad",
-                        "login": "vladislav",
-                        "mobile": "+3725013456",
-                        "email": "vladislav@rogakopita.ee",
-                        "type": "user",
-                        "userDisabled": false
-                    },{
-                        "id": 3,
-                        "fullname": "Denis Mighty",
-                        "shortName": "Denis",
-                        "login": "denis",
-                        "mobile": "+3725123457",
-                        "email": "denis@rogakopita.ee",
-                        "type": "superuser",
-                        "userDisabled": false
-                    },{
-                        "id": 2,
-                        "fullname": "Michael Toomert",
-                        "shortName": "Michael",
-                        "login": "michael",
-                        "mobile": "+3725088620",
-                        "email": "michael@rogakopita.ee",
-                        "type": "user",
-                        "userDisabled": false
-                    }];
+                    return FR.users;
                 }
 
                 return JSON.parse(usersData);

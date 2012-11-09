@@ -10,9 +10,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script src="http://cdn.kendostatic.com/2012.2.913/js/kendo.web.min.js"></script>
     <script src="js/vendor/console.js"></script>
+    <script src="data/defaults.js" type="text/javascript"></script>
 </head>
 <body>
-<div id="example">
+<div id="main">
     <div id="grid" autofocus></div>
 
     <script type="text/x-kendo-template" id="template">
@@ -65,101 +66,10 @@
     </script>
 
     <script>
-        var clients = [ {
-            "ClientID": 1,
-            "Name": "OOO Almazi",
-            "RegistrationNumber": "1234567890",
-            "KMKR": "RU0013232",
-            "AgreementNumber": "34",
-            "Address": {
-                "Street": "Prospekt Lenina 13-7",
-                "Zip": "11978",
-                "State": "",
-                "City": "Moscow",
-                "CountryID": 4,
-                "Country": "Russia" // TODO - fix me. Modify template to take ID and calculate country name from it
-            },
-            "RoleID": 1,
-            "Role": "Buyer",
-            "ContactPerson": {
-                "Name": "Vladimir Metrov",
-                "Email": "vmetrov@almazi.ru",
-                "Phone": "8701190002"
-            },
-            "ContactFax": "",
-            "Payment": {
-                "Days": 30,
-                "Bank": "VTB",
-                "Account": "1803782290",
-                "ReferenceNumber": "17720"
-            },
-            "Comments": "Very aggressive negotiator"
-        }, {
-            "ClientID": 2,
-            "Name": "Kilka OU",
-            "RegistrationNumber": "8821100987",
-            "KMKR": "EE0089119",
-            "AgreementNumber": "2",
-            "Address": {
-                "Street": "Liiavalaia 11-8",
-                "Zip": "13089",
-                "State": "Harjumaa",
-                "City": "Tallinn",
-                "CountryID": 1,
-                "Country": "Estonia"
-            },
-            "RoleID": 2,
-            "Role": "Receiver",
-            "ContactPerson": {
-                "Name": "Mihkel Pihkel",
-                "Email": "mihkel@kilka.ee",
-                "Phone": "3725012078"
-            },
-            "ContactFax": "",
-            "Payment": {
-                "Days": 14,
-                "Bank": "Swedbank",
-                "Account": "22109911889",
-                "ReferenceNumber": "00911"
-            },
-            "Comments": "Like to delay payment"
-        }];
-
-        var countries = [{
-            "value": 1,
-            "text": "Estonia"
-        },{
-            "value": 2,
-            "text": "Latvia"
-        },{
-            "value": 3,
-            "text": "Lithuania"
-        },{
-            "value": 4,
-            "text": "Russia"
-        },{
-            "value": 5,
-            "text": "Germany"
-        }];
-
-        var clientRoles = [{
-           "value": 1,
-           "text": "Buyer"
-        }, {
-            "value": 2,
-            "text": "Receiver"
-        }, {
-            "value": 3,
-            "text": "Transporter"
-        }, {
-            "value": 4,
-            "text": "TIR provider"
-        }];
-
         $(document).ready(function() {
             var dataSource = new kendo.data.DataSource({
                 pageSize: 30,
-                data: clients,
+                data: FR.clients,
                 autoSync: true,
                 schema: {
                     model: {
@@ -195,8 +105,8 @@
                 columns: [
                     { field: "Name", title:"Client name", width: "200px", headerAttributes: { style: "text-align: center" } },
                     { field: "Address.Street", title: "Address", headerAttributes: { style: "text-align: center" }, width: "250px" },
-                    { field: "Address.CountryID", title:"Country", width: "150px", values: countries, headerAttributes: { style: "text-align: center" }  },
-                    { field: "RoleID", title:"Role", width: "100px", values: clientRoles, headerAttributes: { style: "text-align: center" }  },
+                    { field: "Address.CountryID", title:"Country", width: "150px", values: FR.countries, headerAttributes: { style: "text-align: center" }  },
+                    { field: "RoleID", title:"Role", width: "100px", values: FR.clientRoles, headerAttributes: { style: "text-align: center" }  },
                     { field: "Payment.Days", title:"Payment delay", format: "{0}", width: "100px", headerAttributes: { style: "text-align: center" }  },
                     { command: ["destroy"], title: " ", width: "180px" }],
                 editable: {
