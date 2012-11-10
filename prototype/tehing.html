@@ -47,8 +47,28 @@
 
     <script type="text/x-kendo-template" id="template">
         <div>
+            <div id="controlButtons"></div>
             <div id="bills"></div>
         </div>
+    </script>
+
+    <script type="text/x-kendo-template" id="transport-template">
+        <button id="addAuto" class="k-button" onclick="addAuto()">New auto</button>
+        <button id="addShip" class="k-button">New ship</button>
+        <button id="addRailroad" class="k-button">New railroad</button>
+        <button id="addAir" class="k-button">New air</button>
+    </script>
+
+    <script type="text/x-kendo-template" id="bills-template">
+        <button id="addBill" class="k-button" onclick="addBill()">New bill to customer</button>
+    </script>
+
+    <script type="text/x-kendo-template" id="extra-template">
+        <button id="addExtra" class="k-button" onclick="addExtra()">New bill from transporter</button>
+    </script>
+
+    <script type="text/x-kendo-template" id="manual-template">
+        <button id="addManual" class="k-button" onclick="addManual()">New manual expense</button>
     </script>
 
     <style scoped>
@@ -171,7 +191,7 @@
 
             $("#grid").kendoGrid({
                 dataSource: dataSource,
-                height: 400,
+                height: 600,
                 sortable: {
                     mode: "multiple",
                     allowUnsort: true
@@ -201,12 +221,22 @@
         function detailInit(e) {
             var detailRow = e.detailRow;
             console.log(e.data.id);
+
+            if(e.data.id === 1) {
+                detailRow.find("#controlButtons").append(kendo.template($("#transport-template").html()));
+            } else if(e.data.id === 2) {
+                detailRow.find("#controlButtons").append(kendo.template($("#bills-template").html()));
+            } else if(e.data.id === 3) {
+                detailRow.find("#controlButtons").append(kendo.template($("#extra-template").html()));
+            } else if(e.data.id === 4) {
+                detailRow.find("#controlButtons").append(kendo.template($("#manual-template").html()));
+            }
+
             detailRow.find("#bills").kendoGrid({
                 dataSource: [ {"description": "test", "currency": "EUR", "amount": "100.00"}],
                 scrollable: true,
                 sortable: true,
                 selectable: "row",
-                toolbar: [{ name: "create", text: "Add new record" }, { name: "Custom 1", text: "Type2"}],
                 columns: [
                     { field: "description", title: "Description", width: 70 },
                     { field: "currency", title: "Currency", width: 70 },
@@ -214,6 +244,22 @@
                     { command: ["edit", "destroy"], title: " ", width: "100px" }
                 ]
             });
+        }
+
+        function addAuto() {
+            window.open ('auto.html','_self',false);
+        }
+
+        function addBill() {
+            window.open ('bill.html','_self',false);
+        }
+
+        function addExtra() {
+            window.open ('extrabill.html','_self',false);
+        }
+
+        function addManual() {
+            window.open ('manualexpense.html','_self',false);
         }
     </script>
 
