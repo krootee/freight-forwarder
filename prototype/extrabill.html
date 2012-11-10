@@ -17,9 +17,9 @@
 <div id="main" class="demo-section k-widget k-header">
     <ul>
         <label for="inputDateOfIssue">Date of issue: </label><input id="inputDateOfIssue" data-bind="value: dateOfIssue"/><br>
-        <label for="inputDescription">Description: </label><input id="inputDescription" data-bind="value: description" class="k-textbox"/><br>
-        <label for="inputCurrency">Currency: </label><input id="inputCurrency" data-bind="value: currency" class="k-textbox"/><br>
-        <label for="inputAmount">Amount: </label><input id="inputAmount" data-bind="value: amount" class="k-textbox"/><br>
+        <label for="inputDescription">Description: </label><input id="inputDescription" type="text" data-bind="value: description" class="k-textbox"/><br>
+        <label for="inputCurrency">Currency: </label><input id="inputCurrency" type="text" data-bind="value: currency" class="k-textbox"/><br>
+        <label for="inputAmount">Amount: </label><input id="inputAmount" type="text" data-bind="value: amount" class="k-textbox"/><br>
         <input name="files" id="buttonUploadFiles" type="file" /><br>
         <button id="buttonSave" class="k-button" onclick="saveData()">Save data</button>
         <button id="buttonCancel" class="k-button" onclick="cancelDialog()">Cancel</button>
