@@ -212,3 +212,16 @@ FR.dealGridRows = [
         "total": "200.00"
     }
 ];
+
+FR.dealBillRows = [
+    {
+        "id": 1,
+        "description": "Rahvusvaheline transport",
+        "amount": 1,
+        "currency": "EUR",
+        "price": "800.00",
+        "vat": "20.0",
+        "total": "960.00",
+        "comments": "-"
+    }
+];
