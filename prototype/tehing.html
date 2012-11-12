@@ -203,7 +203,10 @@
                 detailTemplate: kendo.template($("#template").html()),
                 detailInit: detailInit,
                 dataBound: function() {
-                    this.expandRow(this.tbody.find("tr.k-master-row").first());
+                    var that = this;
+                    this.tbody.find("tr.k-master-row").map(function() {
+                       that.expandRow(this);
+                    });
                 },
                 columns: [
                     { field: "type", title:"Type", width: "10%", headerAttributes: { style: "text-align: center" } },
