@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Transporti tellimus</title>
+
+    <link href="css/examples-offline.css" rel="stylesheet">
+    <link href="http://cdn.kendostatic.com/2012.2.913/styles/kendo.common.min.css" rel="stylesheet">
+    <link href="http://cdn.kendostatic.com/2012.2.913/styles/kendo.metro.min.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="http://cdn.kendostatic.com/2012.2.913/js/kendo.web.min.js"></script>
+    <script src="js/vendor/console.js"></script>
+    <script src="js/main.js" type="text/javascript"></script>
+    <script src="data/defaults.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="main" class="demo-section k-widget k-header">
+    <ul>
+        <label for="inputDealDate">Kuupaev: </label><input id="inputDealDate" data-bind="value: dealDate"/><br>
+        <label for="listExpeditors">Ekspediitor: </label><input id="listExpeditors" data-bind="value: expeditorId"/><br>
+        <label for="listClient">Klient: </label><input id="listClient" data-bind="value: clientId"/><br>
+        <label for="inputContactInfo">Kontakt info: </label><input id="inputContactInfo" data-bind="value: contactInfo" class="k-textbox"/><br>
+
+        <label for="locationFrom">Kust: </label><input id="locationFrom" data-bind="value: locationFromId"/>
+        <label for="locationTo">Kuhu: </label><input id="locationTo" data-bind="value: locationToId"/><br>
+
+        <label for="inputCargoDescription">Kaup: </label><input id="inputCargoDescription" type="text" data-bind="value: cargoDescription" class="k-textbox"/><br>
+
+        <label for="inputLoadDatetime">Laadimis aeg: </label><input id="inputLoadDatetime" data-bind="value: loadDatetime"/><br>
+        <label for="locationLoadCargo">Laadimiskoht: </label><input id="locationLoadCargo" data-bind="value: locationLoadCargoId"/>
+        <label for="inputCarDescription">Transpordivahend: </label><input id="inputCarDescription" type="text" data-bind="value: carDescription" class="k-textbox"/><br>
+        <label for="inputCarLicensePlate">Auto number: </label><input id="inputCarLicensePlate" type="text" data-bind="value: carLicensePlate" class="k-textbox"/>
+        <label for="inputTrailerLicensePlate">Haagise number: </label><input id="inputTrailerLicensePlate" type="text" data-bind="value: trailerLicensePlate" class="k-textbox"/><br>
+
+        <label for="locationCustoms">Toll: </label><input id="locationCustoms" data-bind="value: locationCustomsId"/><br>
+        <label for="locationLathitollimine">Lathitollimine: </label><input id="locationLathitollimine" data-bind="value: locationLathitollimineId"/><br>
+
+        <label for="inputUnloadDatetime">Mahalaadimine aeg: </label><input id="inputUnloadDatetime" data-bind="value: unloadDatetime"/>
+        <label for="locationUnloadCargo">Mahalaadimine koht: </label><input id="locationUnloadCargo" data-bind="value: locationUnloadCargoId"/><br>
+        <label for="inputUnloadComments">Mahalaadimine info: </label><input id="inputUnloadComments" type="text" data-bind="value: unloadComments" class="k-textbox"/><br>
+
+        <label for="inputTransportationConditions">Transpordi tingimused: </label><textarea id="inputTransportationConditions" data-bind="value: transportationConditions" class="k-textbox" style="width: 400px"></textarea><br>
+        <label for="inputCarPrice">Veohind: </label><input id="inputCarPrice" type="text" data-bind="value: carPrice"/>
+        <label for="inputCarPriceCurrency">Valuuta: </label><input id="inputCarPriceCurrency" type="text" data-bind="value: carPriceCurrency" class="k-textbox"/><br>
+        <label for="inputCarDowntimePrice">Auto seisak hind: </label><input id="inputCarDowntimePrice" type="text" data-bind="value: carDowntimePrice"/>
+        <label for="inputCarDowntimePriceCurrency">Valuuta: </label><input id="inputCarDowntimePriceCurrency" type="text" data-bind="value: carDowntimePriceCurrency" class="k-textbox"/><br>
+
+        <label for="inputLoadingTimeFrom">Laadimise normativ aeg: </label><input id="inputLoadingTimeFrom" type="text" data-bind="value: loadingTimeFrom"/>
+        <label for="locationLoadingFrom">Koht: </label><input id="locationLoadingFrom" data-bind="value: loadingPlaceToId"/><br>
+        <label for="inputLoadingTimeTo">Mahalaadimine normativ aeg: </label><input id="inputLoadingTimeTo" type="text" data-bind="value: loadingTimeTo"/>
+        <label for="locationLoadingTo">Koht: </label><input id="locationLoadingTo" data-bind="value: loadingPlaceFromId"/><br>
+
+        <label for="inputArrivalTime">Saabumine lattu: </label><input id="inputArrivalTime" data-bind="value: arrivalTime"/><br>
+        <label for="inputPenaltyForNotShowing">Trahv mittetilmumine: </label><input id="inputPenaltyForNotShowing" type="text" data-bind="value: penaltyForNotShowing"/><br>
+        <label for="inputPenaltyCarDelay">Trahv auto hilinemine: </label><input id="inputPenaltyCarDelay" type="text" data-bind="value: penaltyCarDelay"/>
+        <label for="inputPenaltyCarDelayCurrency">Valuuta: </label><input id="inputPenaltyCarDelayCurrency" type="text" data-bind="value: penaltyCarDelayCurrency" class="k-textbox"/><br>
+
+        <label for="listTir">Tir: </label><input id="listTir" data-bind="value: tirId"/><br>
+        <label for="inputPaymentTime">Makseaeg: </label><input id="inputPaymentTime" type="text" data-bind="value: paymentTime"/><br>
+
+        <label for="inputComments">Markused: </label><textarea id="inputComments" data-bind="value: comments" class="k-textbox" style="width: 400px"></textarea><br>
+    </ul>
+</div>
+
+<style scoped>
+        /*http://demos.kendoui.com/web/templates/index.html*/
+    #main
+    {
+        background-image: none;
+        margin: -16px 0 30px;
+        padding: 30px 0 25px;
+    }
+
+    #main input,
+    #main textarea,
+    {
+        margin: 5px 0 5px;
+    }
+
+    #main ul label
+    {
+        display: inline-block;
+        vertical-align: middle;
+        width: 110px;
+        padding: 0 8px;
+        text-align: right;
+    }
+</style>
+
+<script>
+    FR.autoViewModel = kendo.observable({
+        dealDate: new Date(),
+        expeditorId: 0,
+        clientId: 1,
+        contactInfo: "",
+        locationFromId: 0,
+        locationToId: 0,
+        cargoDescription: "",
+        loadDatetime: new Date(),
+        locationLoadCargoId: 0,
+        carDescription: "",
+        carLicensePlate: "",
+        trailerLicensePlate: "",
+        locationCustomsId: 0,
+        locationLathitollimineId: 0,
+        unloadDatetime: new Date(),
+        locationUnloadCargoId: 0,
+        unloadComments: "",
+        transportationConditions: "",
+        carPrice: 0,
+        carPriceCurrency: "",
+        carDowntimePrice: 0,
+        carDowntimePriceCurrency: "",
+        loadingTimeFrom: 24,
+        loadingPlaceToId: 0,
+        loadingTimeTo: 24,
+        loadingPlaceFromId: 0,
+        arrivalTime: 0,
+        penaltyForNotShowing: 0,
+        penaltyCarDelay: 0,
+        penaltyCarDelayCurrency: "",
+        tirId: 1,
+        paymentTime: 14,
+        comments: ""
+    });
+
+    kendo.bind($("#main"), FR.autoViewModel);
+
+    $(document).ready(function() {
+        $("#inputDealDate").kendoDatePicker();
+
+        $("#listExpeditors").kendoDropDownList({
+            dataSource: FR.users,
+            dataTextField: "shortName",
+            dataValueField: "id"
+        });
+
+        $("#listClient").kendoComboBox({
+            dataSource: FR.clients,
+            dataTextField: "Name",
+            dataValueField: "ClientID"
+        });
+
+        $("#locationFrom").kendoComboBox({
+            dataSource: FR.placesFrom,
+            dataTextField: "name",
+            dataValueField: "id"
+        });
+
+        $("#locationTo").kendoComboBox({
+            dataSource: FR.placesTo,
+            dataTextField: "name",
+            dataValueField: "id"
+        });
+
+        $("#inputLoadDatetime").kendoDateTimePicker();
+        $("#locationLoadCargo").kendoComboBox({
+            dataSource: FR.placesFrom,
+            dataTextField: "name",
+            dataValueField: "id"
+        });
+
+        $("#locationCustoms").kendoComboBox({
+            dataSource: FR.tolls,
+            dataTextField: "name",
+            dataValueField: "id"
+        });
+
+        $("#locationLathitollimine").kendoComboBox({
+            dataSource: FR.lahtitollimine,
+            dataTextField: "name",
+            dataValueField: "id"
+        });
+
+        $("#inputUnloadDatetime").kendoDatePicker();
+        $("#locationUnloadCargo").kendoComboBox({
+            dataSource: FR.placesTo,
+            dataTextField: "name",
+            dataValueField: "id"
+        });
+
+        $("#inputCarPrice").kendoNumericTextBox();
+        $("#inputCarDowntimePrice").kendoNumericTextBox();
+
+        $("#inputLoadingTimeFrom").kendoNumericTextBox({
+            format: "# hours",
+            min: 1,
+            step: 1
+        });
+        $("#locationLoadingFrom").kendoComboBox({
+            dataSource: FR.placesFrom,
+            dataTextField: "name",
+            dataValueField: "id"
+        });
+
+        $("#inputLoadingTimeTo").kendoNumericTextBox({
+            format: "# hours",
+            min: 1,
+            step: 1
+        });
+        $("#locationLoadingTo").kendoComboBox({
+            dataSource: FR.placesTo,
+            dataTextField: "name",
+            dataValueField: "id"
+        });
+
+        $("#inputArrivalTime").kendoTimePicker();
+
+        $("#inputPenaltyForNotShowing").kendoNumericTextBox({
+            format: "p0",
+            min: 0.00,
+            max: 1,
+            step: 0.01
+        });
+
+        $("#inputPenaltyCarDelay").kendoNumericTextBox();
+
+        $("#listTir").kendoComboBox({
+            dataSource: FR.clients,
+            dataTextField: "Name",
+            dataValueField: "ClientID"
+        });
+
+        $("#inputPaymentTime").kendoNumericTextBox({
+            format: "# days",
+            min: 1,
+            step: 1
+        });
+    });
+</script>
+
+</body>
+</html>

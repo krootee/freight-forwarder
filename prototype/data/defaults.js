@@ -225,3 +225,25 @@ FR.dealBillRows = [
         "comments": "-"
     }
 ];
+
+FR.tolls = [
+    {
+        "id": 0,
+        "name": "Muuga, Estonia"
+    },
+    {
+        "id": 1,
+        "name": "Helsinki, Finland"
+    },
+    {
+        "id": 2,
+        "name": "Leningrad, Russia"
+    }
+];
+
+FR.lahtitollimine = [
+    {
+        "id": 0,
+        "name": "g. Gomel"
+    }
+];

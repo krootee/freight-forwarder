@@ -20,8 +20,8 @@
         <label for="dealDate">Kuupaev: </label><input id="dealDate" data-bind="value: dealDate"/><br>
         <label for="client">Klient: </label><input id="client" data-bind="value: clientId"/><br>
 
-        <label for="inputPaymentDays">Makseaeg: </label><input id="inputPaymentDays" type="text" data-bind="value: paymentDays" class="k-textbox"/><br>
-        <label for="inputPaymentPercent">Tais/osakoorem: </label><input id="inputPaymentPercent" type="text" data-bind="value: paymentPercent" class="k-textbox"/><br>
+        <label for="inputPaymentDays">Makseaeg: </label><input id="inputPaymentDays" type="text" data-bind="value: paymentDays"/><br>
+        <label for="inputPaymentPercent">Tais/osakoorem: </label><input id="inputPaymentPercent" type="text" data-bind="value: paymentPercent"/><br>
         <label for="inputBank">Bank: </label><input id="inputBank" type="text" data-bind="value: bank" class="k-textbox"/><br>
         <label for="inputStatus">Tehingu status: </label><select id="inputStatus" data-bind="value: status">
             <option>Accepted</option>
@@ -66,8 +66,8 @@
         dealDate: new Date(),
         expeditorId: 0,
         clientId: 1,
-        paymentDays: "",
-        paymentPercent: "",
+        paymentDays: 14,
+        paymentPercent: 1,
         bank: "",
         status: "Accepted"
     });
@@ -90,6 +90,20 @@
         });
 
         $("#inputStatus").kendoDropDownList();
+
+        $("#inputPaymentDays").kendoNumericTextBox({
+            format: "# days",
+            min: 1,
+            max: 360,
+            step: 1
+        });
+
+        $("#inputPaymentPercent").kendoNumericTextBox({
+            format: "p0",
+            min: 0.01,
+            max: 1,
+            step: 0.01
+        });
 
         var dataSource = new kendo.data.DataSource({
             data: FR.dealBillRows,

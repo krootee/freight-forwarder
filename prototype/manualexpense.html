@@ -18,8 +18,8 @@
     <ul>
         <label for="inputDateAdded">Date: </label><input id="inputDateAdded" data-bind="value: dateAdded"/><br>
         <label for="inputDescription">Description: </label><input id="inputDescription" type="text" data-bind="value: description" class="k-textbox"/><br>
+        <label for="inputAmount">Amount: </label><input id="inputAmount" type="text" data-bind="value: amount"/><br>
         <label for="inputCurrency">Currency: </label><input id="inputCurrency" type="text" data-bind="value: currency" class="k-textbox"/><br>
-        <label for="inputAmount">Amount: </label><input id="inputAmount" type="text" data-bind="value: amount" class="k-textbox"/><br>
         <label for="checkPaid">Paid?: </label><input id="checkPaid" type="checkbox" data-role="switch" data-bind="value: paidStatus"/><br>
         <button id="buttonSave" class="k-button" onclick="saveData()">Save data</button>
         <button id="buttonCancel" class="k-button" onclick="cancelDialog()">Cancel</button>
@@ -57,7 +57,7 @@
         dateAdded: new Date(),
         description: "",
         currency: "",
-        amount: "",
+        amount: 0,
         paidStatus: false
     });
 
@@ -66,6 +66,7 @@
     $(document).ready(function() {
         $("#inputDateAdded").kendoDatePicker();
         $("#inputDescription").css({ width: '400px'});
+        $("#inputAmount").kendoNumericTextBox();
     });
 
     function saveData() {
