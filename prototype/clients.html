@@ -11,6 +11,14 @@
     <script src="http://cdn.kendostatic.com/2012.2.913/js/kendo.web.min.js"></script>
     <script src="js/vendor/console.js"></script>
     <script src="data/defaults.js" type="text/javascript"></script>
+
+    <!-- start Mixpanel -->
+    <script type="text/javascript">(function(c,a){window.mixpanel=a;var b,d,h,e;b=c.createElement("script");b.type="text/javascript";b.async=!0;b.src=("https:"===c.location.protocol?"https:":"http:")+'//cdn.mxpnl.com/libs/mixpanel-2.1.min.js';d=c.getElementsByTagName("script")[0];d.parentNode.insertBefore(b,d);a._i=[];a.init=function(b,c,f){function d(a,b){var c=b.split(".");2==c.length&&(a=a[c[0]],b=c[1]);a[b]=function(){a.push([b].concat(Array.prototype.slice.call(arguments,0)))}}var g=a;"undefined"!==typeof f?
+            g=a[f]=[]:f="mixpanel";g.people=g.people||[];h="disable track track_pageview track_links track_forms register register_once unregister identify name_tag set_config people.identify people.set people.increment".split(" ");for(e=0;e<h.length;e++)d(g,h[e]);a._i.push([b,c,f])};a.__SV=1.1})(document,window.mixpanel||[]);
+    mixpanel.init("1494e38178df7625c13a19c824eef2aa");
+    </script>
+    <!-- end Mixpanel -->
+    <script type="text/javascript" src="http://l2.io/ip.js?var=myIP"></script>
 </head>
 <body>
 <div id="main">
@@ -115,9 +123,11 @@
                 },
                 remove: function(e) {
                     console.log("Item deleted: " + e.row);
+                    mixpanel.track("clients:click:remove");
                 },
                 saveChanges: function(e) {
                     console.log("Save called: " + JSON.stringify(e.values));
+                    mixpanel.track("clients:click:save changes");
                 }
             });
 
@@ -127,6 +137,9 @@
             grid.bind("edit", function (e) {
                 e.container.find("input").select();
             });
+
+            mixpanel.people.identify(myIP);
+            mixpanel.track("clients:loaded");
         });
 
         function detailInit(e) {
