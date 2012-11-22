@@ -59,6 +59,8 @@
         <label for="inputPaymentTime">Makseaeg: </label><input id="inputPaymentTime" type="text" data-bind="value: paymentTime"/><br>
 
         <label for="inputComments">Markused: </label><textarea id="inputComments" data-bind="value: comments" class="k-textbox" style="width: 400px"></textarea><br>
+        <button id="buttonSave" class="k-button" onclick="saveData()">Save data</button>
+        <button id="buttonCancel" class="k-button" onclick="cancelDialog()">Cancel</button>
     </ul>
 </div>
 
@@ -227,6 +229,14 @@
             step: 1
         });
     });
+
+    function saveData() {
+        history.back();
+    }
+
+    function cancelDialog() {
+        history.back();
+    }
 </script>
 
 </body>
