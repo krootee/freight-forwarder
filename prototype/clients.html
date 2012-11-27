@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Clients information page</title>
+    <META http-equiv="content-type" content="text/html; charset=windows-1251">
+    <title>Информация по клиентам</title>
 
     <link href="css/examples-offline.css" rel="stylesheet">
     <link href="http://cdn.kendostatic.com/2012.2.913/styles/kendo.common.min.css" rel="stylesheet">
@@ -28,45 +29,45 @@
         <div class="tabstrip">
             <ul>
                 <li class="k-state-active">
-                    Company information
+                    Общая информация
                 </li>
                 <li>
-                    Address
+                    Адрес
                 </li>
                 <li>
-                    Payment information
+                    Детали оплаты
                 </li>
             </ul>
             <div>
                 <div class="company-information">
                     <label>Name:</label>#: Name #<br>
                     <!--<label class="k-label">Name:</label><input type="text" data-bind="value: Name" class="k-input"/><br>-->
-                    <label>Registration number:</label>#: RegistrationNumber #<br>
-                    <label>Role:</label>#: Role #<br>
-                    <label>KMKR number:</label>#: KMKR #<br>
-                    <label>Client agreement number:</label>#: AgreementNumber #<br>
-                    <label>Contact person:</label>#: ContactPerson.Name #<br>
-                    <label>Contact email:</label>#: ContactPerson.Email #<br>
-                    <label>Contact mobile number:</label>#: ContactPerson.Phone #<br>
-                    <label>Contact fax number:</label>#: ContactFax #<br>
-                    <label>Comments:</label>#: Comments #<br>
+                    <label>Регистрационный номер:</label>#: RegistrationNumber #<br>
+                    <label>Роль:</label>#: Role #<br>
+                    <label>KMKR номер:</label>#: KMKR #<br>
+                    <label>Номер клиентского соглашения:</label>#: AgreementNumber #<br>
+                    <label>Контактное лицо:</label>#: ContactPerson.Name #<br>
+                    <label>Контактный емайл:</label>#: ContactPerson.Email #<br>
+                    <label>Контактный телефон:</label>#: ContactPerson.Phone #<br>
+                    <label>Контактный номер факса:</label>#: ContactFax #<br>
+                    <label>Комментарии:</label>#: Comments #<br>
                 </div>
             </div>
             <div>
                 <div class="address">
-                    <label>Street:</label>#: Address.Street #<br>
-                    <label>City:</label>#: Address.City #<br>
-                    <label>Zip:</label>#: Address.Zip #<br>
-                    <label>State:</label>#: Address.State #<br>
-                    <label>Country:</label>#: Address.Country #<br>
+                    <label>Улица:</label>#: Address.Street #<br>
+                    <label>Город:</label>#: Address.City #<br>
+                    <label>Индекс:</label>#: Address.Zip #<br>
+                    <label>Район:</label>#: Address.State #<br>
+                    <label>Страна:</label>#: Address.Country #<br>
                 </div>
             </div>
             <div>
                 <div class='payment-details'>
-                    <label>Bills payment delay:</label>#: Payment.Days #<br>
-                    <label>Bank name:</label>#: Payment.Bank #<br>
-                    <label>Bank account number:</label>#: Payment.Account #<br>
-                    <label>Transaction reference number:</label>#: Payment.ReferenceNumber #<br>
+                    <label>Отсрочка платежей:</label>#: Payment.Days #<br>
+                    <label>Имя банка:</label>#: Payment.Bank #<br>
+                    <label>Банковский счёт:</label>#: Payment.Account #<br>
+                    <label>Номер ссылки для проводки:</label>#: Payment.ReferenceNumber #<br>
                 </div>
             </div>
         </div>
@@ -109,17 +110,17 @@
                 dataBound: function() {
                     this.expandRow(this.tbody.find("tr.k-master-row").first());
                 },
-                toolbar: [{ name: "create", text: "Add new company" }, "save"],
+                toolbar: [{ name: "create", text: "Добавить новую фирму" }, { name: "save", text: "Сохранить изменения"}],
                 columns: [
-                    { field: "Name", title:"Client name", width: "200px", headerAttributes: { style: "text-align: center" } },
-                    { field: "Address.Street", title: "Address", headerAttributes: { style: "text-align: center" }, width: "250px" },
-                    { field: "Address.CountryID", title:"Country", width: "150px", values: FR.countries, headerAttributes: { style: "text-align: center" }  },
-                    { field: "RoleID", title:"Role", width: "100px", values: FR.clientRoles, headerAttributes: { style: "text-align: center" }  },
-                    { field: "Payment.Days", title:"Payment delay", format: "{0}", width: "100px", headerAttributes: { style: "text-align: center" }  },
-                    { command: ["destroy"], title: " ", width: "180px" }],
+                    { field: "Name", title:"Имя клиента", width: "200px", headerAttributes: { style: "text-align: center" } },
+                    { field: "Address.Street", title: "Адрес", headerAttributes: { style: "text-align: center" }, width: "250px" },
+                    { field: "Address.CountryID", title:"Страна", width: "150px", values: FR.countries, headerAttributes: { style: "text-align: center" }  },
+                    { field: "RoleID", title:"Роль", width: "100px", values: FR.clientRoles, headerAttributes: { style: "text-align: center" }  },
+                    { field: "Payment.Days", title:"Отсрочка платежей", format: "{0}", width: "100px", headerAttributes: { style: "text-align: center" }  },
+                    { command: [{name: "destroy", text: "Удалить"}], title: " ", width: "180px" }],
                 editable: {
                     mode: "incell",
-                    confirmation: "Are you sure you want to remove this company?"
+                    confirmation: "Вы уверены что хотите удалить эту фирму?"
                 },
                 remove: function(e) {
                     console.log("Item deleted: " + e.row);

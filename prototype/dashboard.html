@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Starting page</title>
+    <META http-equiv="content-type" content="text/html; charset=windows-1251">
+    <title>Контрольная панель пользователя</title>
 
     <link href="css/examples-offline.css" rel="stylesheet">
     <link href="http://cdn.kendostatic.com/2012.2.913/styles/kendo.common.min.css" rel="stylesheet">
@@ -24,10 +25,11 @@
 <body>
 <div id="main" class="demo-section k-widget k-header">
     <ul>
-        <button id="buttonEditUsers" class="k-button" onclick="editUsers()">Edit users</button>
-        <button id="buttonViewDeals" class="k-button" onclick="openDeals()">Tehingud</button>
+        <button id="buttonEditUsers" class="k-button" onclick="editUsers()">Пользователи системы</button>
+        <button id="buttonViewDeals" class="k-button" onclick="openDeals()">Список сделок</button>
+        <button id="buttonViewClients" class="k-button" onclick="openClients()">Список клиентов</button>
     </ul>
-    <a href="https://mixpanel.com/f/partner"><img src="//cdn.mxpnl.com/site_media/images/partner/badge_blue.png" alt="Mobile Analytics"/></a>
+    <!--<a href="https://mixpanel.com/f/partner"><img src="//cdn.mxpnl.com/site_media/images/partner/badge_blue.png" alt="Mobile Analytics"/></a>-->
 </div>
 
 <style scoped>
@@ -70,6 +72,11 @@
     function openDeals() {
         mixpanel.track("dashboard:click:deals");
         location.href='tehingud.html';
+    }
+
+    function openClients() {
+        mixpanel.track("dashboard:click:clients");
+        location.href='clients.html';
     }
 </script>
 
