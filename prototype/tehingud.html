@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Deals summary page</title>
+    <META http-equiv="content-type" content="text/html; charset=windows-1251">
+    <title>Список сделок</title>
 
     <link href="css/examples-offline.css" rel="stylesheet">
     <link href="http://cdn.kendostatic.com/2012.2.913/styles/kendo.common.min.css" rel="stylesheet">
@@ -23,8 +24,8 @@
 <body>
 <div id="main">
     <div id="controlButtons">
-        <button id="addNew" class="k-button" onclick="addDeal()">Add new deal</button>
-        <button id="editDeal" class="k-button" onclick="toolbarEditDeal()">Edit deal</button>
+        <button id="addNew" class="k-button" onclick="addDeal()">Добавить новую сделку</button>
+        <button id="editDeal" class="k-button" onclick="toolbarEditDeal()">Отредактировать сделку</button>
     </div>
     <div id="grid" autofocus></div>
 
@@ -78,11 +79,11 @@
                 navigatable: true,
                 columns: [
                     { field: "dealId", title:"ID", width: "100px", headerAttributes: { style: "text-align: center" } },
-                    { field: "date", title:"Transaction date", width: "200px", headerAttributes: { style: "text-align: center" } },
-                    { field: "clientName", title:"Client", width: "200px", headerAttributes: { style: "text-align: center" } },
-                    { field: "merchandise", title:"Merchandise", width: "200px", headerAttributes: { style: "text-align: center" } },
-                    { field: "lastModified", title:"Last modification", width: "200px", headerAttributes: { style: "text-align: center" } },
-                    { command: ["destroy"], title: " ", width: "180px" }],
+                    { field: "date", title:"Дата сделки", width: "200px", headerAttributes: { style: "text-align: center" } },
+                    { field: "clientName", title:"Клиент", width: "200px", headerAttributes: { style: "text-align: center" } },
+                    { field: "merchandise", title:"Товар", width: "200px", headerAttributes: { style: "text-align: center" } },
+                    { field: "lastModified", title:"Дата последнего изменения", width: "200px", headerAttributes: { style: "text-align: center" } },
+                    { command: [{name: "destroy", text: "Удалить сделку"}], title: " ", width: "180px" }],
                 editable: {
                     update: false,
                     destroy: true

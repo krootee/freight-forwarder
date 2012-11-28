@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Extra bill page</title>
+    <META http-equiv="content-type" content="text/html; charset=windows-1251">
+    <title>Дополнительные счета от перевозчика</title>
 
     <link href="css/examples-offline.css" rel="stylesheet">
     <link href="http://cdn.kendostatic.com/2012.2.913/styles/kendo.common.min.css" rel="stylesheet">
@@ -24,13 +25,13 @@
 <body>
 <div id="main" class="demo-section k-widget k-header">
     <ul>
-        <label for="inputDateOfIssue">Date of issue: </label><input id="inputDateOfIssue" data-bind="value: dateOfIssue"/><br>
-        <label for="inputDescription">Description: </label><input id="inputDescription" type="text" data-bind="value: description" class="k-textbox"/><br>
-        <label for="inputAmount">Amount: </label><input id="inputAmount" type="text" data-bind="value: amount"/><br>
-        <label for="inputCurrency">Currency: </label><input id="inputCurrency" type="text" data-bind="value: currency" class="k-textbox"/><br>
+        <label for="inputDateOfIssue">Дата выдачи чека: </label><input id="inputDateOfIssue" data-bind="value: dateOfIssue"/><br>
+        <label for="inputDescription">Описание: </label><input id="inputDescription" type="text" data-bind="value: description" class="k-textbox"/><br>
+        <label for="inputAmount">Сумма: </label><input id="inputAmount" type="text" data-bind="value: amount"/><br>
+        <label for="inputCurrency">Валюта: </label><input id="inputCurrency" type="text" data-bind="value: currency" class="k-textbox"/><br>
         <input name="files" id="buttonUploadFiles" type="file" /><br>
-        <button id="buttonSave" class="k-button" onclick="saveData()">Save data</button>
-        <button id="buttonCancel" class="k-button" onclick="cancelDialog()">Cancel</button>
+        <button id="buttonSave" class="k-button" onclick="saveData()">Сохранить изменения</button>
+        <button id="buttonCancel" class="k-button" onclick="cancelDialog()">Отмена</button>
     </ul>
 </div>
 
@@ -83,7 +84,7 @@
                 autoUpload: true
             },
             localization: {
-                select: "Select bill to upload..."
+                select: "Выберите счёт для сохранение в системе..."
             }
         });
 

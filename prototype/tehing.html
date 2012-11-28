@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Deal edit page</title>
+    <META http-equiv="content-type" content="text/html; charset=windows-1251">
+    <title>Редактирование сделки</title>
 
     <link href="css/examples-offline.css" rel="stylesheet">
     <link href="http://cdn.kendostatic.com/2012.2.913/styles/kendo.common.min.css" rel="stylesheet">
@@ -24,33 +25,33 @@
 <body>
     <div id="main" class="demo-section k-widget k-header">
         <ul>
-            <label for="dealId">Reference number: </label><label id="dealId" data-bind="text: idValue"></label><br>
-            <label for="listExpeditors">Ekspediitor: </label><input id="listExpeditors" data-bind="value: expeditorId"/><br>
-            <label for="dealDate">Kuupaev: </label><input id="dealDate" data-bind="value: dealDate"/><br>
-            <label for="client">Klient: </label><input id="client" data-bind="value: clientId"/>
-            <label for="trailerInfo">Treiler/Konteiner: </label><input id="trailerInfo" data-bind="value: trailerInfo" class="k-textbox"/><br>
-            <label for="placeFrom">Kust: </label><input id="placeFrom" data-bind="value: placeFromId"/>
-            <label for="placeTo">Kuhu: </label><input id="placeTo" data-bind="value: placeToId"/><br>
-            <label for="sender">Saatja: </label><input id="sender" data-bind="value: senderId"/>
-            <label for="receiver">Saaja: </label><input id="receiver" data-bind="value: receiverId"/><br>
-            <label for="cargoDescription">Kaup: </label><input id="cargoDescription" type="text" data-bind="value: cargo.description" class="k-textbox" style="width: 425px"/><br>
-            <label for="cargoTotalWeight">Kogukaal: </label><input id="cargoTotalWeight" type="text" data-bind="value: cargo.totalWeight"/>
-            <label for="cargoVolume">Maht: </label><input id="cargoVolume" type="text" data-bind="value: cargo.volume"/><br>
-            <label for="cargoTakenPlaces">Kohtade arv: </label><input id="cargoTakenPlaces" type="text" data-bind="value: cargo.takenPlaces" class="k-textbox"/>
-            <label for="cargoAccountedWeight">Arvestatud kaal: </label><input id="cargoAccountedWeight" type="text" data-bind="value: cargo.accountedWeight"/><br>
-            <label for="cargoShipName">Laev: </label><input id="cargoShipName" type="text" data-bind="value: cargo.shipName" class="k-textbox"/>
-            <label for="cargoAgentNr">Agendi reference nr.: </label><input id="cargoAgentNr" type="text" data-bind="value: cargo.agentNr" class="k-textbox"/><br>
+            <label for="dealId">Порядковый номер: </label><label id="dealId" data-bind="text: idValue"></label><br>
+            <label for="listExpeditors">Экспедитор: </label><input id="listExpeditors" data-bind="value: expeditorId"/><br>
+            <label for="dealDate">День: </label><input id="dealDate" data-bind="value: dealDate"/><br>
+            <label for="client">Клиент: </label><input id="client" data-bind="value: clientId"/>
+            <label for="trailerInfo">Трейлер/контейнер: </label><input id="trailerInfo" data-bind="value: trailerInfo" class="k-textbox"/><br>
+            <label for="placeFrom">Откуда: </label><input id="placeFrom" data-bind="value: placeFromId"/>
+            <label for="placeTo">Куда: </label><input id="placeTo" data-bind="value: placeToId"/><br>
+            <label for="sender">Отправитель: </label><input id="sender" data-bind="value: senderId"/>
+            <label for="receiver">Получатель: </label><input id="receiver" data-bind="value: receiverId"/><br>
+            <label for="cargoDescription">Товар: </label><input id="cargoDescription" type="text" data-bind="value: cargo.description" class="k-textbox" style="width: 425px"/><br>
+            <label for="cargoTotalWeight">Общий вес: </label><input id="cargoTotalWeight" type="text" data-bind="value: cargo.totalWeight"/>
+            <label for="cargoVolume">Объём: </label><input id="cargoVolume" type="text" data-bind="value: cargo.volume"/><br>
+            <label for="cargoTakenPlaces">Количество мест: </label><input id="cargoTakenPlaces" type="text" data-bind="value: cargo.takenPlaces" class="k-textbox"/>
+            <label for="cargoAccountedWeight">Расчётный вес: </label><input id="cargoAccountedWeight" type="text" data-bind="value: cargo.accountedWeight"/><br>
+            <label for="cargoShipName">Корабль: </label><input id="cargoShipName" type="text" data-bind="value: cargo.shipName" class="k-textbox"/>
+            <label for="cargoAgentNr">Номер ссылки агента: </label><input id="cargoAgentNr" type="text" data-bind="value: cargo.agentNr" class="k-textbox"/><br>
             <label for="cargoArvNr">Arv. nr.: </label><input id="cargoArvNr" type="text" data-bind="value: cargo.arvNr" class="k-textbox"/>
-            <label for="cargoValue">Kauba vartus: </label><input id="cargoValue" type="text" data-bind="value: cargo.value"/>
-            <label for="cargoValueCurrency">Valuuta: </label><input id="cargoValueCurrency" type="text" data-bind="value: cargo.valueCurrency" class="k-textbox"/><br>
-            <label for="cargoConditions">Tingimused: </label><textarea id="cargoConditions" data-bind="value: cargo.conditions" rows="2" cols="100" class="k-textbox" style="width: 400px"></textarea>
-            <label for="cargoComments">Markused: </label><textarea id="cargoComments" data-bind="value: cargo.comments" rows="2" cols="100" class="k-textbox" style="width: 400px"></textarea><br>
+            <label for="cargoValue">Стоимость товара: </label><input id="cargoValue" type="text" data-bind="value: cargo.value"/>
+            <label for="cargoValueCurrency">Валюта: </label><input id="cargoValueCurrency" type="text" data-bind="value: cargo.valueCurrency" class="k-textbox"/><br>
+            <label for="cargoConditions">Условия перевозки: </label><textarea id="cargoConditions" data-bind="value: cargo.conditions" rows="2" cols="100" class="k-textbox" style="width: 400px"></textarea>
+            <label for="cargoComments">Комментарии: </label><textarea id="cargoComments" data-bind="value: cargo.comments" rows="2" cols="100" class="k-textbox" style="width: 400px"></textarea><br>
         </ul>
         <!--<div id="controlButtons">-->
             <!--<button id="addNew" class="k-button" onclick="addDeal()">Add new deal</button>-->
             <!--<button id="editDeal" class="k-button" onclick="toolbarEditDeal()">Edit deal</button>-->
         <!--</div>-->
-        <label>List of bills: </label>
+        <label>Список документов: </label>
         <div id="grid"></div>
     </div>
 
@@ -62,22 +63,22 @@
     </script>
 
     <script type="text/x-kendo-template" id="transport-template">
-        <button id="addAuto" class="k-button" onclick="addAuto()">New auto</button>
-        <button id="addShip" class="k-button">New ship</button>
-        <button id="addRailroad" class="k-button">New railroad</button>
-        <button id="addAir" class="k-button">New air</button>
+        <button id="addAuto" class="k-button" onclick="addAuto()">Новая перевозка автотранспортом</button>
+        <button id="addShip" class="k-button">Новая перевозка корабльём</button>
+        <button id="addRailroad" class="k-button">Новая перевозка железной дорогой</button>
+        <button id="addAir" class="k-button">Новая авиа перевозка </button>
     </script>
 
     <script type="text/x-kendo-template" id="bills-template">
-        <button id="addBill" class="k-button" onclick="addBill()">New bill to customer</button>
+        <button id="addBill" class="k-button" onclick="addBill()">Добавить новый счёт заказчику</button>
     </script>
 
     <script type="text/x-kendo-template" id="extra-template">
-        <button id="addExtra" class="k-button" onclick="addExtra()">New bill from transporter</button>
+        <button id="addExtra" class="k-button" onclick="addExtra()">Добавить новый счёт от перевозчика</button>
     </script>
 
     <script type="text/x-kendo-template" id="manual-template">
-        <button id="addManual" class="k-button" onclick="addManual()">New manual expense</button>
+        <button id="addManual" class="k-button" onclick="addManual()">Добавить новyе дополнительные расходы</button>
     </script>
 
     <style scoped>
@@ -232,10 +233,10 @@
                     });
                 },
                 columns: [
-                    { field: "type", title:"Type", width: "10%", headerAttributes: { style: "text-align: center" } },
-                    { field: "description", title:"Description", width: "70%", headerAttributes: { style: "text-align: center" } },
-                    { field: "currency", title:"Currency", width: "10%", headerAttributes: { style: "text-align: center" } },
-                    { field: "total", title:"Total", width: "10%", headerAttributes: { style: "text-align: center" } }
+                    { field: "type", title:"Тип", width: "10%", headerAttributes: { style: "text-align: center" } },
+                    { field: "description", title:"Описание", width: "70%", headerAttributes: { style: "text-align: center" } },
+                    { field: "currency", title:"Валюта", width: "10%", headerAttributes: { style: "text-align: center" } },
+                    { field: "total", title:"Сумма", width: "10%", headerAttributes: { style: "text-align: center" } }
                 ],
                 editable: false
             });
@@ -262,15 +263,15 @@
             }
 
             detailRow.find("#bills").kendoGrid({
-                dataSource: [ {"description": "test", "currency": "EUR", "amount": "100.00"}],
+                dataSource: [ {"description": "Тестовая запись", "currency": "EUR", "amount": "100.00"}],
                 scrollable: true,
                 sortable: true,
                 selectable: "row",
                 columns: [
-                    { field: "description", title: "Description", width: 70 },
-                    { field: "currency", title: "Currency", width: 70 },
-                    { field: "amount", title: "Amount", width: 70 },
-                    { command: ["edit", "destroy"], title: " ", width: "100px" }
+                    { field: "description", title: "Описание", width: 70 },
+                    { field: "currency", title: "Валюта", width: 70 },
+                    { field: "amount", title: "Сумма", width: 70 },
+                    { command: [{name: "edit", text: "Редактировать"}, {name: "destroy", text: "Удалить"}], title: " ", width: "100px" }
                 ]
             });
         }

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Create new bill</title>
+    <META http-equiv="content-type" content="text/html; charset=windows-1251">
+    <title>Создать новый счёт</title>
 
     <link href="css/examples-offline.css" rel="stylesheet">
     <link href="http://cdn.kendostatic.com/2012.2.913/styles/kendo.common.min.css" rel="stylesheet">
@@ -24,24 +25,24 @@
 <body>
 <div id="main" class="demo-section k-widget k-header">
     <ul>
-        <label for="listExpeditors">Ekspediitor: </label><input id="listExpeditors" data-bind="value: expeditorId"/><br>
-        <label for="dealDate">Kuupaev: </label><input id="dealDate" data-bind="value: dealDate"/><br>
-        <label for="client">Klient: </label><input id="client" data-bind="value: clientId"/><br>
+        <label for="listExpeditors">Экспедитор: </label><input id="listExpeditors" data-bind="value: expeditorId"/><br>
+        <label for="dealDate">День: </label><input id="dealDate" data-bind="value: dealDate"/><br>
+        <label for="client">Клиент: </label><input id="client" data-bind="value: clientId"/><br>
 
-        <label for="inputPaymentDays">Makseaeg: </label><input id="inputPaymentDays" type="text" data-bind="value: paymentDays"/><br>
-        <label for="inputPaymentPercent">Tais/osakoorem: </label><input id="inputPaymentPercent" type="text" data-bind="value: paymentPercent"/><br>
-        <label for="inputBank">Bank: </label><input id="inputBank" type="text" data-bind="value: bank" class="k-textbox"/><br>
-        <label for="inputStatus">Tehingu status: </label><select id="inputStatus" data-bind="value: status">
-            <option>Accepted</option>
-            <option>Rejected</option>
-            <option>Sent</option>
-            <option>Money received</option>
+        <label for="inputPaymentDays">Время оплаты: </label><input id="inputPaymentDays" type="text" data-bind="value: paymentDays"/><br>
+        <label for="inputPaymentPercent">Полный/частичный: </label><input id="inputPaymentPercent" type="text" data-bind="value: paymentPercent"/><br>
+        <label for="inputBank">Банк: </label><input id="inputBank" type="text" data-bind="value: bank" class="k-textbox"/><br>
+        <label for="inputStatus">Статус счёта: </label><select id="inputStatus" data-bind="value: status">
+            <option>Принят</option>
+            <option>Откланён</option>
+            <option>Отослан</option>
+            <option>Деньги получены</option>
         </select><br>
     </ul>
-    <label>List of bills: </label>
+    <label>Список услуг: </label>
     <div id="grid"></div>
-    <button id="buttonSave" class="k-button" onclick="saveData()">Save data</button>
-    <button id="buttonCancel" class="k-button" onclick="cancelDialog()">Cancel</button>
+    <button id="buttonSave" class="k-button" onclick="saveData()">Сохранить изменения</button>
+    <button id="buttonCancel" class="k-button" onclick="cancelDialog()">Отмена</button>
 </div>
 
 <style scoped>
@@ -137,17 +138,17 @@
             reorderable: true,
             selectable: "row",
             navigatable: true,
-            toolbar: ["create"],
+            toolbar: [{name: "create", text: "Добавить новую запись"}],
             columns: [
                 { field: "id", title:"ID", width: "10%", headerAttributes: { style: "text-align: center" } },
-                { field: "description", title:"Kirjeldus", width: "20%", headerAttributes: { style: "text-align: center" } },
-                { field: "amount", title:"Kogus", width: "10%", headerAttributes: { style: "text-align: center" } },
-                { field: "currency", title:"Valuuta", width: "10%", headerAttributes: { style: "text-align: center" } },
-                { field: "price", title:"Summa", width: "10%", headerAttributes: { style: "text-align: center" } },
-                { field: "vat", title:"Valuuta", width: "10%", headerAttributes: { style: "text-align: center" } },
-                { field: "total", title:"Hind", width: "10%", headerAttributes: { style: "text-align: center" } },
-                { field: "comments", title:"Markused", width: "10%", headerAttributes: { style: "text-align: center" } },
-                { command: ["destroy"], title: " ", width: "100px" }
+                { field: "description", title:"Описание", width: "20%", headerAttributes: { style: "text-align: center" } },
+                { field: "amount", title:"Количество", width: "10%", headerAttributes: { style: "text-align: center" } },
+                { field: "currency", title:"Валюта", width: "10%", headerAttributes: { style: "text-align: center" } },
+                { field: "price", title:"Цена", width: "10%", headerAttributes: { style: "text-align: center" } },
+                { field: "vat", title:"VAT", width: "10%", headerAttributes: { style: "text-align: center" } },
+                { field: "total", title:"Сумма", width: "10%", headerAttributes: { style: "text-align: center" } },
+                { field: "comments", title:"Комментарии", width: "10%", headerAttributes: { style: "text-align: center" } },
+                { command: [{name: "destroy", text: "Удалить"}], title: " ", width: "100px" }
             ],
             editable: {
                 update: true
